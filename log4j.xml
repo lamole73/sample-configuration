@@ -1,0 +1,27 @@
+<log4j:configuration debug="true">
+
+<appender name="Default" class="org.apache.log4j.rolling.RollingFileAppender">
+    <param name="file" value="/u01/log/CPS/cps.log"/>
+    <param name="append" value="true"/>
+    <param name="encoding" value="UTF-8"/>				
+    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" value="/u01/log/CPS/cps.log.%d{yyyy-MM-dd}.gz"/>
+    </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss.SSS} %X{userName} %X{RemoteIP} [%t] [%x] %-5p %30.30c{1} - Line (%L) %m%n"/>
+    </layout>    
+</appender>
+
+<!-- Generic appl logger -->
+
+<logger name="lu.infeurope" additivity="false">
+    	<level value="DEBUG"/>
+    	<appender-ref ref="APPL_Appender"/>
+</logger>
+
+<root>
+    <priority value="INFO"/>
+    <appender-ref ref="Default"/>
+</root>
+
+</log4j:configuration>
